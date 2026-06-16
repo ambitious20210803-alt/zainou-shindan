@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>財脳タイプ診断 ｜ 財脳覚醒ラボ</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230b1026'/%3E%3Ctext y='72' x='50' font-size='60' text-anchor='middle'%3E%F0%9F%A6%89%3C/text%3E%3C/svg%3E">
 <meta name="description" content="8つの動物タイプであなたの“お金との付き合い方”がわかる。財脳覚醒ラボ公式・無料診断。">
 <meta property="og:title" content="財脳タイプ診断｜あなたは何の動物？">
 <meta property="og:description" content="あなたの財運の状態と、豊かになる方法がわかる無料診断。">
@@ -187,17 +188,18 @@ const LINE_OPENCHAT_URL = "https://line.me/ti/g2/XXXXXXXXXXXXXXXX";
 // ============================================================
 
 const $=id=>document.getElementById(id);
-let cur=0, answers=[];
+let cur=0, answers=[], locked=false;
 
 // top animals
 const topKeys=["owl","deer","dolphin","lion","hawk","elephant","wolf","swan"];
 $("topAnimals").innerHTML=topKeys.map(k=>`<img src="${ANIMALS[k].img}" alt="${ANIMALS[k].name}">`).join("");
 
 function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));$(id).classList.add('active');window.scrollTo(0,0);}
-function start(){cur=0;answers=[];show('s-q');render();}
+function start(){cur=0;answers=[];locked=false;show('s-q');render();}
 function restart(){show('s-top');}
 
 function render(){
+  locked=false;
   const Q=QUESTIONS[cur];
   $("qcount").textContent=`Q${cur+1} / ${QUESTIONS.length}`;
   $("bar").style.width=((cur)/QUESTIONS.length*100)+"%";
@@ -212,11 +214,13 @@ function render(){
   });
 }
 function choose(i){
+  if(locked)return;          // 連打・多重進行ガード
+  locked=true;
   answers[cur]=i;
   if(cur<QUESTIONS.length-1){cur++;render();}
   else finish();
 }
-function back(){if(cur>0){cur--;render();}}
+function back(){if(locked)return;if(cur>0){cur--;render();}}
 
 function finish(){
   $("bar").style.width="100%";
