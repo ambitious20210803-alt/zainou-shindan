@@ -199,7 +199,6 @@ function start(){cur=0;answers=[];locked=false;show('s-q');render();}
 function restart(){show('s-top');}
 
 function render(){
-  locked=false;
   const Q=QUESTIONS[cur];
   $("qcount").textContent=`Q${cur+1} / ${QUESTIONS.length}`;
   $("bar").style.width=((cur)/QUESTIONS.length*100)+"%";
@@ -219,6 +218,8 @@ function choose(i){
   answers[cur]=i;
   if(cur<QUESTIONS.length-1){cur++;render();}
   else finish();
+  // 同一バーストの連打をブロックし、次ティックで解除
+  setTimeout(()=>{locked=false;},120);
 }
 function back(){if(locked)return;if(cur>0){cur--;render();}}
 
