@@ -2,12 +2,20 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>財脳タイプ診断 ｜ 財脳覚醒ラボ</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>財脳タイプ診断｜あなたはどのアニマルタイプ？</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230b1026'/%3E%3Ctext y='72' x='50' font-size='60' text-anchor='middle'%3E%F0%9F%A6%89%3C/text%3E%3C/svg%3E">
-<meta name="description" content="8つの動物タイプであなたの“お金との付き合い方”がわかる。財脳覚醒ラボ公式・無料診断。">
-<meta property="og:title" content="財脳タイプ診断｜あなたは何の動物？">
-<meta property="og:description" content="あなたの財運の状態と、豊かになる方法がわかる無料診断。">
+<meta name="description" content="10の質問でわかる、あなたの豊かさを受け取る器と、今のあなたに合った富の受け取り方。動物でわかる財脳タイプ、無料診断。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="財脳タイプ診断｜あなたはどのアニマルタイプ？">
+<meta property="og:description" content="10の質問でわかる、あなたの“豊かさを受け取る器”。今のあなたに合った富の受け取り方をお伝えします。">
+<meta property="og:image" content="https://ambitious20210803-alt.github.io/zainou-shindan/img/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="財脳タイプ診断｜あなたはどのアニマルタイプ？">
+<meta name="twitter:description" content="10の質問でわかる、あなたの豊かさを受け取る器。">
+<meta name="twitter:image" content="https://ambitious20210803-alt.github.io/zainou-shindan/img/ogp.png">
 <style>
 :root{
   --navy:#0b1026; --navy2:#141b3d; --gold:#f2c84b; --gold2:#e0a83a;
@@ -33,6 +41,7 @@ body{
 .hero h1{font-size:30px;font-weight:800;letter-spacing:.04em;line-height:1.4;}
 .hero h1 .em{color:var(--gold);}
 .hero p{color:var(--sub);margin-top:18px;font-size:15px;}
+.hero p.lead-zainou{margin-top:14px;font-size:13.5px;color:var(--sub);background:rgba(242,200,75,.07);border:1px solid rgba(242,200,75,.22);border-radius:12px;padding:11px 14px;display:inline-block;}
 .animals-row{display:flex;justify-content:center;gap:6px;margin:34px 0 10px;flex-wrap:wrap;}
 .animals-row img{width:58px;height:58px;border-radius:50%;border:1px solid var(--line);object-fit:cover;box-shadow:0 4px 18px rgba(0,0,0,.4);}
 .btn{
@@ -87,12 +96,21 @@ body{
 .card.method{background:linear-gradient(160deg,rgba(242,200,75,.1),rgba(242,200,75,.02));border-color:rgba(242,200,75,.35);}
 .statebox{display:flex;gap:14px;align-items:flex-start;}
 .statebox img{width:54px;height:54px;border-radius:12px;flex-shrink:0;object-fit:cover;border:1px solid var(--line);}
-.cta-wrap{margin-top:30px;background:linear-gradient(160deg,rgba(6,199,85,.12),rgba(255,255,255,.02));
-  border:1px solid rgba(6,199,85,.3);border-radius:18px;padding:24px 22px;text-align:center;}
-.cta-wrap h3{font-size:18px;font-weight:800;}
+.cta-wrap{margin-top:30px;background:linear-gradient(160deg,rgba(242,200,75,.12),rgba(255,255,255,.02));
+  border:1px solid rgba(242,200,75,.35);border-radius:18px;padding:26px 22px;text-align:center;}
+.cta-wrap h3{font-size:18px;font-weight:800;color:var(--gold);}
 .cta-wrap p{font-size:14px;color:var(--sub);margin-top:10px;}
+.cta-wrap .closing{font-size:15px;color:var(--txt);font-weight:700;margin-top:16px;line-height:1.7;}
 .foot{text-align:center;color:var(--sub);font-size:11px;margin-top:40px;line-height:1.8;}
-.share{margin-top:14px;}
+.share{margin-top:30px;text-align:center;}
+.share-lead{font-size:14px;color:var(--sub);margin-bottom:14px;}
+.share-btns{display:flex;gap:10px;margin-bottom:18px;}
+.sbtn{flex:1;border:none;cursor:pointer;font-size:13.5px;font-weight:700;padding:13px 8px;border-radius:12px;color:#fff;transition:transform .15s,opacity .15s;letter-spacing:.02em;}
+.sbtn:active{transform:scale(.96);}
+.sbtn.x{background:#000;border:1px solid rgba(255,255,255,.25);}
+.sbtn.line{background:linear-gradient(135deg,#06C755,#04a548);}
+.sbtn.copy{background:rgba(255,255,255,.08);border:1px solid var(--line);color:var(--txt);}
+.sbtn.copy.done{background:rgba(242,200,75,.18);border-color:var(--gold);color:var(--gold);}
 </style>
 </head>
 <body>
@@ -101,10 +119,11 @@ body{
 
   <!-- ===== TOP ===== -->
   <section class="screen active" id="s-top">
-    <div class="brand">財 脳 覚 醒 ラ ボ</div>
+    <div class="brand">財 脳 タ イ プ 診 断</div>
     <div class="hero">
-      <h1>あなたの<span class="em">財脳タイプ</span>は<br>どの動物？</h1>
-      <p>14の質問でわかる、あなたの“お金との付き合い方”。<br>そして今の<b style="color:var(--txt)">財運の状態</b>と、豊かになる方法。</p>
+      <h1>あなたの<span class="em">財脳</span>は<br>どのアニマルタイプ？</h1>
+      <p class="lead-zainou"><b style="color:var(--txt)">財脳</b>とは、あなたが豊かさをどう受け取るかの“心のクセ”のこと。</p>
+      <p>10の質問でわかる、あなたの“<b style="color:var(--txt)">豊かさを受け取る器</b>”。<br>そして今のあなたに合った<b style="color:var(--txt)">富の受け取り方</b>をお伝えします。</p>
     </div>
     <div class="animals-row" id="topAnimals"></div>
     <button class="btn" onclick="start()">診断をはじめる（無料）</button>
@@ -113,7 +132,7 @@ body{
 
   <!-- ===== QUESTION ===== -->
   <section class="screen" id="s-q">
-    <div class="qhead"><span class="qcount" id="qcount">Q1 / 14</span></div>
+    <div class="qhead"><span class="qcount" id="qcount">Q1 / 10</span></div>
     <div class="bar"><i id="bar"></i></div>
     <div class="qtext" id="qtext"></div>
     <div class="choices" id="choices"></div>
@@ -165,11 +184,16 @@ body{
     <div class="cta-wrap">
       <h3 id="ctaTitle">財脳覚醒ラボへようこそ</h3>
       <p id="rCta"></p>
-      <a class="btn line" id="lineBtn" href="#" target="_blank" rel="noopener">LINEで「財脳覚醒ラボ」に参加する</a>
-      <p style="font-size:11px;color:var(--sub);margin-top:12px">無料 ／ いつでも退出できます</p>
+      <p class="closing">あなたの財脳を、これから一緒に磨いていきましょう。<br>財脳覚醒ラボで、豊かさの受け取り方を学びましょう！</p>
     </div>
 
     <div class="share">
+      <p class="share-lead">結果をシェアして、周りの人の財脳タイプも調べてみよう。</p>
+      <div class="share-btns">
+        <button class="sbtn x" onclick="shareX()">𝕏 でシェア</button>
+        <button class="sbtn line" onclick="shareLine()">LINEで送る</button>
+        <button class="sbtn copy" id="copyBtn" onclick="copyUrl()">🔗 URLをコピー</button>
+      </div>
       <button class="btn ghost" onclick="restart()">もう一度診断する</button>
     </div>
 
@@ -183,12 +207,35 @@ body{
 
 <script src="data.js"></script>
 <script>
-// ====== ここだけ書き換え：LINEオープンチャットの招待URL ======
-const LINE_OPENCHAT_URL = "https://line.me/ti/g2/XXXXXXXXXXXXXXXX";
-// ============================================================
-
 const $=id=>document.getElementById(id);
-let cur=0, answers=[], locked=false;
+let cur=0, answers=[], locked=false, lastResult=null;
+
+// シェア対象URL（診断サイトのURL）
+const SHARE_URL = "https://ambitious20210803-alt.github.io/zainou-shindan/";
+function shareText(){
+  const a = lastResult && lastResult.animal;
+  if(a){ return `私の財脳タイプは「${a.emoji} ${a.name}」だった！\n${a.catch}\n\nあなたはどのアニマルタイプ？↓`; }
+  return "あなたの財脳タイプはどのアニマル？↓";
+}
+function shareX(){
+  const url="https://twitter.com/intent/tweet?text="+encodeURIComponent(shareText()+"\n")+"&url="+encodeURIComponent(SHARE_URL)+"&hashtags="+encodeURIComponent("財脳タイプ診断");
+  window.open(url,"_blank","noopener");
+}
+function shareLine(){
+  const url="https://line.me/R/msg/text/?"+encodeURIComponent(shareText()+"\n"+SHARE_URL);
+  window.open(url,"_blank","noopener");
+}
+async function copyUrl(){
+  const txt=shareText()+"\n"+SHARE_URL;
+  try{
+    await navigator.clipboard.writeText(txt);
+  }catch(e){
+    const ta=document.createElement("textarea");ta.value=txt;document.body.appendChild(ta);ta.select();
+    try{document.execCommand("copy");}catch(_){}document.body.removeChild(ta);
+  }
+  const b=$("copyBtn");const o=b.textContent;b.textContent="✓ コピーしました";b.classList.add("done");
+  setTimeout(()=>{b.textContent=o;b.classList.remove("done");},1800);
+}
 
 // top animals
 const topKeys=["owl","deer","dolphin","lion","hawk","elephant","wolf","swan"];
@@ -200,8 +247,10 @@ function restart(){show('s-top');}
 
 function render(){
   const Q=QUESTIONS[cur];
-  $("qcount").textContent=`Q${cur+1} / ${QUESTIONS.length}`;
-  $("bar").style.width=((cur)/QUESTIONS.length*100)+"%";
+  const total=QUESTIONS.length, remain=total-cur;
+  $("qcount").textContent = remain<=1 ? `Q${cur+1} / ${total}・あと少し！` : `Q${cur+1} / ${total}・あと${remain-1>0?remain-1:0}問`;
+  // 進捗バー：現在の設問進行を含めて「進んでる感」を出す（表示中の問もカウント）
+  $("bar").style.width=(((cur+1)/total)*100)+"%";
   $("qtext").textContent=Q.q;
   $("backBtn").style.visibility = cur===0 ? "hidden":"visible";
   $("choices").innerHTML="";
@@ -232,6 +281,7 @@ function finish(){
 }
 
 function renderResult(r){
+  lastResult=r;
   const a=r.animal, s=r.state;
   $("rStateImg").src=s.img; $("rStateImg2").src=s.img;
   $("rStateLabel").textContent="財運：" + s.name;
@@ -243,7 +293,6 @@ function renderResult(r){
   $("rStateBody").textContent=s.body;
   $("rMethod").textContent=a.method;
   $("rCta").textContent=s.cta;
-  $("lineBtn").href=LINE_OPENCHAT_URL;
   show('s-result');
 }
 
