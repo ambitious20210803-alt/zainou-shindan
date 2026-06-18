@@ -94,6 +94,10 @@ body{
 .card h3{font-size:14px;color:var(--gold);letter-spacing:.1em;margin-bottom:10px;}
 .card p{font-size:15px;color:var(--txt);}
 .card.method{background:linear-gradient(160deg,rgba(242,200,75,.1),rgba(242,200,75,.02));border-color:rgba(242,200,75,.35);}
+.card.match .matchbox{display:flex;gap:14px;align-items:center;}
+.card.match .matchbox img{width:72px;height:72px;border-radius:16px;flex-shrink:0;object-fit:cover;border:1px solid var(--line);box-shadow:0 6px 20px rgba(0,0,0,.4);}
+.card.match .matchname{font-size:18px;font-weight:800;color:var(--gold);margin-bottom:6px;}
+.card.match p{font-size:14px;color:var(--sub);line-height:1.7;}
 .statebox{display:flex;gap:14px;align-items:flex-start;}
 .statebox img{width:54px;height:54px;border-radius:12px;flex-shrink:0;object-fit:cover;border:1px solid var(--line);}
 .cta-wrap{margin-top:30px;background:linear-gradient(160deg,rgba(242,200,75,.12),rgba(255,255,255,.02));
@@ -179,6 +183,17 @@ body{
     <div class="card method">
       <h3>あなたが豊かになる方法</h3>
       <p id="rMethod"></p>
+    </div>
+
+    <div class="card match">
+      <h3>相性のいい財脳タイプ</h3>
+      <div class="matchbox">
+        <img id="rMatchImg" alt="">
+        <div>
+          <div class="matchname" id="rMatchName"></div>
+          <p id="rMatchReason"></p>
+        </div>
+      </div>
     </div>
 
     <div class="cta-wrap">
@@ -292,6 +307,12 @@ function renderResult(r){
   $("rStateLead").textContent=s.lead;
   $("rStateBody").textContent=s.body;
   $("rMethod").textContent=a.method;
+  const partner = ANIMALS[a.match];
+  if(partner){
+    $("rMatchImg").src=partner.img;
+    $("rMatchName").innerHTML=partner.emoji+" "+partner.name;
+    $("rMatchReason").textContent=a.matchReason;
+  }
   $("rCta").textContent=s.cta;
   show('s-result');
 }
