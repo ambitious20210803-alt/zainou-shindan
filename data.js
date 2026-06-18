@@ -3,43 +3,43 @@
 // 軸: I=内向 / E=外向 , R=受容 / K=開拓
 // 各動物の象限とキー
 const ANIMALS = {
-  owl:      { name:"金のふくろう",     emoji:"🦉", img:"img/owl_gold.webp",      quad:"IR", strong:"I",
-    match:"lion", matchReason:"じっくり考えるあなたに、迷わず動くライオンが「最初の一歩」をくれます。あなたの深い洞察が、ライオンの勢いに正しい方向を与える。考える人と動く人の、最高の補完関係です。",
+  owl:      { rarity:13, rank:5, name:"金のふくろう",     emoji:"🦉", img:"img/owl_gold.webp",      quad:"IR", strong:"I",
+    match:"lion", matchReason:"じっくり考えるあなたに、迷わず動くライオンが「最初の一歩」をくれます。あなたの深い洞察が、ライオンの勢いに正しい方向を与える。考える人と動く人の、最高の補完関係です。", mismatch:"swan", mismatchReason:"同じ内向タイプ同士、居心地は良いけれど刺激は少なめ。お互いの「深さ」を認め合いながら、たまには外の世界へ一緒に踏み出すと、新しい豊かさの扉が開きます。",
     catch:"知るほど、豊かさが寄ってくる人",
     body:"あなたは物事の本質を静かに見抜く、洞察の人。焦らず観察し、深く理解することで安心します。学びと知性があなたの財産です。",
     method:"あなたは「分かった瞬間」に流れが動くタイプ。インプットはもう十分足りています。学んだことを1つ実践に移すたび、現実が動き出します。考える時間を半分にして、試す時間を増やしてください。" },
-  swan:     { name:"真珠のはくちょう", emoji:"🦢", img:"img/swan_pearl.webp",    quad:"IR", strong:"R",
-    match:"hawk", matchReason:"穏やかに整えるあなたに、高く狙う蒼鷹が「大きな視野」を運んできます。あなたが整えた土台の上で、蒼鷹は大胆に羽ばたける。安心と挑戦が手を取り合う相性です。",
+  swan:     { rarity:17, rank:8, name:"真珠のはくちょう", emoji:"🦢", img:"img/swan_pearl.webp",    quad:"IR", strong:"R",
+    match:"hawk", matchReason:"穏やかに整えるあなたに、高く狙う蒼鷹が「大きな視野」を運んできます。あなたが整えた土台の上で、蒼鷹は大胆に羽ばたける。安心と挑戦が手を取り合う相性です。", mismatch:"owl", mismatchReason:"穏やかで落ち着く組み合わせですが、変化のきっかけは生まれにくいかも。お互いの静けさを大切にしつつ、新しい挑戦を一つ持ち込むと関係が動き出します。",
     catch:"整うほど、豊かさが流れ込む人",
     body:"あなたは穏やかで美意識が高く、調和の中で力を発揮する人。乱れた環境やザワついた心が苦手で、静けさを愛します。",
     method:"あなたの豊かさは「心の凪」から生まれます。焦りやノイズを手放し、環境を整えることが最大の投資。部屋・人間関係・情報を心地よいものだけにすると、自然と流れがやってきます。" },
-  wolf:     { name:"黒曜石のおおかみ", emoji:"🐺", img:"img/wolf_obsidian.webp", quad:"IK", strong:"I",
-    match:"dolphin", matchReason:"一人で深く掘るあなたに、明るいイルカが「人とのつながり」を運んできます。あなたの専門性をイルカが世に広げてくれる。職人と伝道師の、強い相性です。",
+  wolf:     { rarity:9, rank:2, name:"黒曜石のおおかみ", emoji:"🐺", img:"img/wolf_obsidian.webp", quad:"IK", strong:"I",
+    match:"dolphin", matchReason:"一人で深く掘るあなたに、明るいイルカが「人とのつながり」を運んできます。あなたの専門性をイルカが世に広げてくれる。職人と伝道師の、強い相性です。", mismatch:"hawk", mismatchReason:"どちらも開拓タイプで、進む方向がぶつかることも。でも本気で認め合えれば最強。お互いの「こだわり」を尊重できたとき、誰も追いつけない強さになります。",
     catch:"群れずに、自分の道を掘る人",
     body:"あなたは一人の時間を愛し、自分の信念で動く職人気質。他人に流されず、決めたら静かに、しかし確実に掘り進みます。",
     method:"あなたは「一点集中」で抜ける人。あれこれ手を広げると力が散ります。一番大事な1つに資源を全集中させたとき、誰も追いつけない深さに到達します。比較をやめ、自分の道だけを掘ってください。" },
-  deer:     { name:"銀の鹿",         emoji:"🦌", img:"img/deer_silver.webp",   quad:"IK", strong:"K",
-    match:"elephant", matchReason:"ここぞで跳ぶあなたに、どっしりした琥珀のぞうが「安心の土台」をくれます。あなたの瞬発力を、ぞうの安定が受け止める。跳ぶ人と支える人の、心地よい相性です。",
+  deer:     { rarity:11, rank:3, name:"銀の鹿",         emoji:"🦌", img:"img/deer_silver.webp",   quad:"IK", strong:"K",
+    match:"elephant", matchReason:"ここぞで跳ぶあなたに、どっしりした琥珀のぞうが「安心の土台」をくれます。あなたの瞬発力を、ぞうの安定が受け止める。跳ぶ人と支える人の、心地よい相性です。", mismatch:"lion", mismatchReason:"慎重なあなたと、即断のライオン。ペースの違いに戸惑うかも。でもライオンの行動力はあなたの背中を押してくれる。違いを受け入れると一歩が軽くなります。",
     catch:"しなやかに、ここぞで跳ぶ人",
     body:"あなたは感受性が鋭く、変化やチャンスをいち早く察知する人。普段は慎重ですが、ここぞという場面で大きく跳ぶ瞬発力を秘めています。",
     method:"あなたは「タイミングの天才」。普段は慎重でいいのです。「今だ」と感じた一瞬に思い切り跳ぶことが、あなたの豊かさを決めます。直感のサインを信じて、その時だけは迷わないでください。" },
-  dolphin:  { name:"翡翠のイルカ",   emoji:"🐬", img:"img/dolphin_jade.webp",  quad:"ER", strong:"R",
-    match:"wolf", matchReason:"人を惹きつけるあなたに、一途な黒曜石のおおかみが「本物の深み」をくれます。あなたの発信力に、おおかみの専門性が中身を与える。広げる人と深める人の、最高の相性です。",
+  dolphin:  { rarity:15, rank:6, name:"翡翠のイルカ",   emoji:"🐬", img:"img/dolphin_jade.webp",  quad:"ER", strong:"R",
+    match:"wolf", matchReason:"人を惹きつけるあなたに、一途な黒曜石のおおかみが「本物の深み」をくれます。あなたの発信力に、おおかみの専門性が中身を与える。広げる人と深める人の、最高の相性です。", mismatch:"elephant", mismatchReason:"どちらも人を大切にする温かい組み合わせ。心地よい反面、ぬるくなりやすい一面も。お互いに少し背伸びした目標を掲げると、二人の豊かさが伸びていきます。",
     catch:"楽しむほど、豊かさが集まる人",
     body:"あなたは明るく社交的で、人を惹きつけ場を和ませる人。遊び心と好奇心で動き、堅苦しさが苦手です。",
     method:"あなたの豊かさは「ご機嫌」から生まれます。我慢して頑張るほど枯れていくタイプ。ワクワクすることを優先してください。楽しんでいる姿そのものが、人とチャンスを引き寄せます。遊ぶように働きましょう。" },
-  elephant: { name:"琥珀のぞう",     emoji:"🐘", img:"img/elephant_amber.webp",quad:"ER", strong:"E",
-    match:"deer", matchReason:"安心を配るあなたに、感性鋭い銀の鹿が「チャンスのサイン」を運んできます。あなたの安定が、鹿の跳躍を後押しする。支える人と跳ぶ人の、温かい相性です。",
+  elephant: { rarity:16, rank:7, name:"琥珀のぞう",     emoji:"🐘", img:"img/elephant_amber.webp",quad:"ER", strong:"E",
+    match:"deer", matchReason:"安心を配るあなたに、感性鋭い銀の鹿が「チャンスのサイン」を運んできます。あなたの安定が、鹿の跳躍を後押しする。支える人と跳ぶ人の、温かい相性です。", mismatch:"dolphin", mismatchReason:"安心感のある優しい関係ですが、現状維持に流れやすいかも。お互いの「楽しさ」と「安定」を持ち寄って、新しいことに挑むと化学反応が起きます。",
     catch:"安心を配る人に、豊かさが集まる人",
     body:"あなたは包容力があり面倒見がよく、周囲から頼られ信頼を集める人。どっしり構えて場を安定させます。",
     method:"あなたは「信頼の貯金」で豊かになる人。目先の損得より、人に与え続けることが最大のリターンになります。あなたが安心を配るほど、巡り巡って大きな形で返ってきます。与える人でいてください。" },
-  lion:     { name:"黄金のライオン", emoji:"🦁", img:"img/lion_gold.webp",     quad:"EK", strong:"E",
-    match:"owl", matchReason:"勢いよく進むあなたに、思慮深い金のふくろうが「正しい方向」をくれます。あなたの行動力を、ふくろうの洞察が導く。動く人と考える人の、最高の補完関係です。",
+  lion:     { rarity:12, rank:4, name:"黄金のライオン", emoji:"🦁", img:"img/lion_gold.webp",     quad:"EK", strong:"E",
+    match:"owl", matchReason:"勢いよく進むあなたに、思慮深い金のふくろうが「正しい方向」をくれます。あなたの行動力を、ふくろうの洞察が導く。動く人と考える人の、最高の補完関係です。", mismatch:"deer", mismatchReason:"勢いのライオンと慎重な鹿。スピード感が噛み合わないこともありますが、だからこそ補い合える。鹿の直感を信じて待てたとき、最高のタイミングを掴めます。",
     catch:"決めた瞬間、道が拓ける人",
     body:"あなたは行動力とカリスマ性の塊。即断即決でぐいぐい進み、停滞を嫌うリーダー気質です。",
     method:"あなたは「スピード」が武器。考えすぎる時間が一番の損失です。迷ったら進む、走りながら直す。あなたの決断の速さそのものが周りを巻き込み、豊かさを引き寄せます。止まらないでください。" },
-  hawk:     { name:"蒼鷹",           emoji:"🦅", img:"img/hawk_azure.webp",    quad:"EK", strong:"K",
-    match:"swan", matchReason:"高く狙うあなたに、穏やかな真珠のはくちょうが「整った足場」をくれます。あなたの挑戦を、はくちょうの調和が支える。挑戦と安心が響き合う相性です。",
+  hawk:     { rarity:7, rank:1, name:"蒼鷹",           emoji:"🦅", img:"img/hawk_azure.webp",    quad:"EK", strong:"K",
+    match:"swan", matchReason:"高く狙うあなたに、穏やかな真珠のはくちょうが「整った足場」をくれます。あなたの挑戦を、はくちょうの調和が支える。挑戦と安心が響き合う相性です。", mismatch:"wolf", mismatchReason:"互いに我が道を行くタイプで、ペースが合わない場面も。だからこそ、相手の流儀を認めると学びが大きい。違いを面白がれたとき、視野が一気に広がります。",
     catch:"高く見据え、狙いを定める人",
     body:"あなたは高い視点から全体を見渡し、狙った機会を逃さない人。挑戦を恐れず、何度でも舞い上がる力を持っています。",
     method:"あなたは「視座の高さ」で勝つ人。目の前の損得に囚われず、遠くの大きな獲物を見据えてください。一度狙いを定めたら、一気に舞い降りる。その大胆さがあなたの豊かさを連れてきます。小さくまとまらないでください。" }
@@ -173,5 +173,8 @@ function diagnose(answers){
   if(block>=4) stateKey="sleeping";
   else if(block>=1) stateKey="awakening";
   else stateKey="flowing";
-  return { animal:ANIMALS[animalKey], state:STATES[stateKey], scores:{I,E,R,K,block} };
+  const extro = (I+E)>0 ? Math.round(E/(I+E)*100) : 50;
+  const pioneer = (R+K)>0 ? Math.round(K/(R+K)*100) : 50;
+  const bars = { extro, pioneer, intro:100-extro, receptive:100-pioneer };
+  return { animal:ANIMALS[animalKey], state:STATES[stateKey], scores:{I,E,R,K,block}, bars };
 }

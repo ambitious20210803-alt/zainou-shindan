@@ -90,6 +90,13 @@ body{
 .r-animal h2{font-size:30px;font-weight:800;margin-top:4px;letter-spacing:.03em;}
 .r-animal h2 .e{font-size:26px;}
 .r-animal .catch{color:var(--gold);font-size:15px;font-weight:700;margin-top:8px;}
+.r-animal .rarity{display:inline-block;margin-top:14px;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--navy);background:linear-gradient(135deg,var(--gold),var(--gold2));border-radius:99px;padding:6px 16px;box-shadow:0 4px 14px rgba(242,200,75,.35);}
+.bars{margin-top:18px;}
+.barrow{margin-bottom:14px;}
+.barrow .lbl{display:flex;justify-content:space-between;font-size:12.5px;color:var(--sub);margin-bottom:6px;font-weight:600;}
+.barrow .lbl b{color:var(--txt);font-weight:700;}
+.barrow .track{height:8px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden;}
+.barrow .fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:99px;transition:width .8s ease;}
 .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;margin-top:24px;}
 .card h3{font-size:14px;color:var(--gold);letter-spacing:.1em;margin-bottom:10px;}
 .card p{font-size:15px;color:var(--txt);}
@@ -162,6 +169,21 @@ body{
       <div class="you">あなたの財脳タイプは</div>
       <h2 id="rAnimalName"></h2>
       <div class="catch" id="rCatch"></div>
+      <div class="rarity" id="rRarity"></div>
+    </div>
+
+    <div class="card">
+      <h3>あなたの財脳バランス</h3>
+      <div class="bars">
+        <div class="barrow">
+          <div class="lbl"><span>内向</span><b id="barLblIE"></b><span>外向</span></div>
+          <div class="track"><div class="fill" id="barIE" style="width:50%"></div></div>
+        </div>
+        <div class="barrow">
+          <div class="lbl"><span>受容</span><b id="barLblRK"></b><span>開拓</span></div>
+          <div class="track"><div class="fill" id="barRK" style="width:50%"></div></div>
+        </div>
+      </div>
     </div>
 
     <div class="card">
@@ -192,6 +214,17 @@ body{
         <div>
           <div class="matchname" id="rMatchName"></div>
           <p id="rMatchReason"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card match">
+      <h3>お互いに学べる財脳タイプ</h3>
+      <div class="matchbox">
+        <img id="rMisImg" alt="">
+        <div>
+          <div class="matchname" id="rMisName"></div>
+          <p id="rMisReason"></p>
         </div>
       </div>
     </div>
@@ -302,6 +335,12 @@ function renderResult(r){
   $("rStateLabel").textContent="財運：" + s.name;
   $("rAnimalImg").src=a.img;
   $("rAnimalName").innerHTML=`<span class="e">${a.emoji}</span> ${a.name}`;
+  $("rRarity").textContent="レア度 "+a.rank+"位 / 8タイプ中（約"+a.rarity+"%）";
+  const bb=r.bars;
+  $("barIE").style.width=bb.extro+"%";
+  $("barRK").style.width=bb.pioneer+"%";
+  $("barLblIE").textContent=(bb.extro>=50?"外向 "+bb.extro:"内向 "+bb.intro)+"%";
+  $("barLblRK").textContent=(bb.pioneer>=50?"開拓 "+bb.pioneer:"受容 "+bb.receptive)+"%";
   $("rCatch").textContent=a.catch;
   $("rBody").textContent=a.body;
   $("rStateLead").textContent=s.lead;
@@ -312,6 +351,12 @@ function renderResult(r){
     $("rMatchImg").src=partner.img;
     $("rMatchName").innerHTML=partner.emoji+" "+partner.name;
     $("rMatchReason").textContent=a.matchReason;
+  }
+  const mis = ANIMALS[a.mismatch];
+  if(mis){
+    $("rMisImg").src=mis.img;
+    $("rMisName").innerHTML=mis.emoji+" "+mis.name;
+    $("rMisReason").textContent=a.mismatchReason;
   }
   $("rCta").textContent=s.cta;
   show('s-result');
