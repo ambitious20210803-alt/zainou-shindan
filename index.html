@@ -82,8 +82,10 @@ body{
 /* ---- RESULT ---- */
 .r-state{text-align:center;margin-top:10px;}
 .r-state img{width:88px;height:88px;border-radius:50%;border:1px solid var(--line);object-fit:cover;animation:pop .6s ease;}
-.r-state .slabel{display:inline-block;margin-top:12px;font-size:13px;letter-spacing:.15em;color:var(--gold);
-  border:1px solid var(--gold);border-radius:99px;padding:5px 16px;}
+.r-state .slabel{display:inline-block;margin-top:12px;font-size:15px;font-weight:800;letter-spacing:.08em;color:var(--gold);
+  border:1px solid var(--gold);border-radius:99px;padding:8px 20px;background:rgba(242,200,75,.1);}
+.r-state .slabel b{font-size:18px;}
+.r-state .scap{display:block;margin-top:8px;font-size:12px;color:var(--sub);letter-spacing:.04em;}
 .r-animal{text-align:center;margin-top:22px;animation:pop .7s ease;}
 .r-animal img{width:200px;height:200px;border-radius:24px;object-fit:cover;border:1px solid var(--line);
   box-shadow:0 12px 40px rgba(0,0,0,.5);}
@@ -166,6 +168,7 @@ body{
     <div class="r-state">
       <img id="rStateImg" alt="">
       <div><span class="slabel" id="rStateLabel"></span></div>
+      <span class="scap">いまのあなたの「財運の状態」です</span>
     </div>
     <div class="r-animal">
       <img id="rAnimalImg" alt="">
@@ -304,7 +307,17 @@ const topKeys=["owl","deer","dolphin","lion","hawk","elephant","wolf","swan"];
 $("topAnimals").innerHTML=topKeys.map(k=>`<img src="${ANIMALS[k].img}" alt="${ANIMALS[k].name}">`).join("");
 
 function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));$(id).classList.add('active');window.scrollTo(0,0);}
-function start(){cur=0;answers=[];locked=false;show('s-q');render();}
+// 診断開始時に各設問の言い回しをランダム選定（スコアは不変）
+let chosenQ=[];
+function pickQuestions(){
+  chosenQ=QUESTIONS.map(Q=>{
+    if(Q.variants && Q.variants.length){
+      return Q.variants[Math.floor(Math.random()*Q.variants.length)];
+    }
+    return Q.q || "";
+  });
+}
+function start(){cur=0;answers=[];locked=false;pickQuestions();show('s-q');render();}
 function restart(){show('s-top');}
 
 function render(){
@@ -313,7 +326,7 @@ function render(){
   $("qcount").textContent = remain<=1 ? `Q${cur+1} / ${total}・あと少し！` : `Q${cur+1} / ${total}・あと${remain-1>0?remain-1:0}問`;
   // 進捗バー：現在の設問進行を含めて「進んでる感」を出す（表示中の問もカウント）
   $("bar").style.width=(((cur+1)/total)*100)+"%";
-  $("qtext").textContent=Q.q;
+  $("qtext").textContent=(chosenQ[cur]!==undefined?chosenQ[cur]:Q.q);
   $("backBtn").style.visibility = cur===0 ? "hidden":"visible";
   $("choices").innerHTML="";
   Q.choices.forEach((c,i)=>{
@@ -346,7 +359,7 @@ function renderResult(r){
   lastResult=r;
   const a=r.animal, s=r.state;
   $("rStateImg").src=s.img; $("rStateImg2").src=s.img;
-  $("rStateLabel").textContent="財運：" + s.name;
+  $("rStateLabel").innerHTML=`✨ あなたの財運は<b>“${s.name}”</b>状態`;
   $("rAnimalImg").src=a.img;
   $("rAnimalName").innerHTML=`<span class="e">${a.emoji}</span> ${a.name}`;
   $("rRarity").textContent="レア度 "+a.rank+"位 / 8タイプ中（約"+a.rarity+"%）";
