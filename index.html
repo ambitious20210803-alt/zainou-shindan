@@ -274,13 +274,18 @@ function shareText(){
   if(a){ return `私の財脳タイプは「${a.emoji} ${a.name}」だった！\n${a.catch}\n\nあなたはどのアニマルタイプ？↓`; }
   return "あなたの財脳タイプはどのアニマル？↓";
 }
+function openShare(url){
+  // window.open がポップアップブロックで弾かれた場合は同タブ遷移にフォールバック
+  const w=window.open(url,"_blank");
+  if(!w||w.closed||typeof w.closed==="undefined"){ location.href=url; }
+}
 function shareX(){
-  const url="https://twitter.com/intent/tweet?text="+encodeURIComponent(shareText()+"\n")+"&url="+encodeURIComponent(SHARE_URL)+"&hashtags="+encodeURIComponent("財脳タイプ診断");
-  window.open(url,"_blank","noopener");
+  const url="https://x.com/intent/tweet?text="+encodeURIComponent(shareText())+"&url="+encodeURIComponent(SHARE_URL)+"&hashtags="+encodeURIComponent("財脳タイプ診断");
+  openShare(url);
 }
 function shareLine(){
   const url="https://line.me/R/msg/text/?"+encodeURIComponent(shareText()+"\n"+SHARE_URL);
-  window.open(url,"_blank","noopener");
+  openShare(url);
 }
 async function copyUrl(){
   const txt=shareText()+"\n"+SHARE_URL;
