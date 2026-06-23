@@ -237,5 +237,5 @@ function diagnose(answers){
   const extro = (I+E)>0 ? Math.round(E/(I+E)*100) : 50;
   const pioneer = (R+K)>0 ? Math.round(K/(R+K)*100) : 50;
   const bars = { extro, pioneer, intro:100-extro, receptive:100-pioneer };
-  return { animal:ANIMALS[animalKey], state:STATES[stateKey], scores:{I,E,R,K,block}, bars };
+  return { key:animalKey, animal:ANIMALS[animalKey], state:STATES[stateKey], scores:{I,E,R,K,block}, bars };
 }
