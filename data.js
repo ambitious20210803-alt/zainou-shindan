@@ -237,5 +237,16 @@ function diagnose(answers){
   const extro = (I+E)>0 ? Math.round(E/(I+E)*100) : 50;
   const pioneer = (R+K)>0 ? Math.round(K/(R+K)*100) : 50;
   const bars = { extro, pioneer, intro:100-extro, receptive:100-pioneer };
-  return { key:animalKey, animal:ANIMALS[animalKey], state:STATES[stateKey], scores:{I,E,R,K,block}, bars };
+  // 主軸（strong軸）の「強さ」で3パターン枝分かれ。
+  // そのタイプらしさの濃さ＝主軸が強いほど high（ど真ん中タイプ）、弱いほど low（バランス型）
+  const strongAxis = ANIMALS[animalKey] ? ANIMALS[animalKey].strong : "I";
+  const mainScore =
+    strongAxis==="I" ? bars.intro :
+    strongAxis==="E" ? bars.extro :
+    strongAxis==="R" ? bars.receptive : bars.pioneer;
+  let subPattern;
+  if(mainScore<70) subPattern="low";
+  else if(mainScore>85) subPattern="high";
+  else subPattern="mid";
+  return { key:animalKey, animal:ANIMALS[animalKey], state:STATES[stateKey], scores:{I,E,R,K,block}, bars, mainScore, subPattern };
 }

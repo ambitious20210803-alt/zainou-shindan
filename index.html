@@ -169,6 +169,9 @@ body{
 .dd-inner p.dd-strong{font-size:16px;font-weight:800;color:var(--gold);
   background:rgba(242,200,75,.08);border-left:3px solid var(--gold);
   border-radius:8px;padding:12px 14px;margin:16px 0;line-height:1.7;}
+.dd-inner p.dd-variant-intro{font-size:15px;font-weight:700;color:#fff;
+  background:rgba(120,150,255,.12);border:1px solid rgba(120,150,255,.3);
+  border-radius:10px;padding:13px 15px;margin:14px 0 4px;line-height:1.75;}
 </style>
 </head>
 <body>
@@ -317,6 +320,7 @@ body{
 
 <script src="data.js"></script>
 <script src="deepdive.js"></script>
+<script src="deepdive_variant.js"></script>
 <script>
 const $=id=>document.getElementById(id);
 let cur=0, answers=[], locked=false, lastResult=null;
@@ -406,6 +410,47 @@ function finish(){
   setTimeout(()=>{clearInterval(t);renderResult(diagnose(answers));},2600);
 }
 
+// 枝分かれ：本質末尾にintro追記、今日の一歩をstepに差し替え
+function applyVariant(r){
+  if(typeof DEEPDIVE_VARIANT==="undefined") return;
+  const v = DEEPDIVE_VARIANT[r.key] && DEEPDIVE_VARIANT[r.key][r.subPattern];
+  if(!v) return;
+  const inner=$("ddInner");
+  const nodes=Array.from(inner.children);
+  const h4s=nodes.filter(n=>n.tagName==="H4");
+  if(h4s.length<2) return;
+  // intro: 最初のh4（✨本質）グループの末尾＝2つ目のh4の直前に挿入
+  if(v.intro){
+    const p=document.createElement("p");
+    p.className="dd-variant-intro";
+    p.textContent=v.intro;
+    inner.insertBefore(p, h4s[1]);
+  }
+  // step: 「今日の一歩」h4を探し、次のh4までの<p>を削除してstepで置換
+  if(v.step){
+    const cur=Array.from(inner.children);
+    let stepH4=null;
+    for(const n of cur){ if(n.tagName==="H4" && n.textContent.indexOf("今日の一歩")>=0){ stepH4=n; break; } }
+    if(stepH4){
+      // stepH4の次から次のH4までを削除
+      let sib=stepH4.nextSibling;
+      while(sib && !(sib.tagName==="H4")){
+        const nx=sib.nextSibling;
+        if(sib.nodeType===1) inner.removeChild(sib);
+        sib=nx;
+      }
+      // stepを行ごとに<p>として挿入（stepH4の直後）
+      const lines=v.step.split("\n").filter(x=>x.trim()!=="");
+      const anchor=stepH4.nextSibling;
+      lines.forEach(line=>{
+        const p=document.createElement("p");
+        p.textContent=line;
+        inner.insertBefore(p, anchor);
+      });
+    }
+  }
+}
+
 function toggleDeep(){
   const w=$("ddWrap");
   if(!w)return;
@@ -453,6 +498,7 @@ function renderResult(r){
   const ddWrap=$("ddWrap");
   if(typeof DEEPDIVE!=="undefined" && r.key && DEEPDIVE[r.key]){
     $("ddInner").innerHTML=DEEPDIVE[r.key];
+    applyVariant(r);
     ddWrap.classList.remove("open");
     ddWrap.style.display="";
   }else if(ddWrap){
