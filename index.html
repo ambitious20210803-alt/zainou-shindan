@@ -134,15 +134,29 @@ body{
 .sbtn.copy.done{background:rgba(242,200,75,.18);border-color:var(--gold);color:var(--gold);}
 
 /* ---- DEEPDIVE（もっと深く知る） ---- */
-.dd-wrap{margin-top:24px;}
-.dd-toggle{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;cursor:pointer;
-  background:linear-gradient(160deg,rgba(242,200,75,.14),rgba(242,200,75,.03));
-  border:1px solid rgba(242,200,75,.4);border-radius:16px;padding:18px;
-  color:var(--gold);font-size:16px;font-weight:800;letter-spacing:.04em;transition:background .15s;}
-.dd-toggle:hover{background:rgba(242,200,75,.2);}
-.dd-toggle .chev{transition:transform .3s ease;font-size:13px;}
+.dd-wrap{margin-top:30px;}
+.dd-toggle{position:relative;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;cursor:pointer;overflow:hidden;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  border:none;border-radius:18px;padding:22px 18px;
+  color:#2a1d00;font-size:18px;font-weight:800;letter-spacing:.04em;
+  box-shadow:0 8px 26px rgba(242,200,75,.4);
+  animation:ddpulse 2.2s ease-in-out infinite;transition:transform .15s;}
+.dd-toggle:active{transform:scale(.97);}
+@keyframes ddpulse{
+  0%,100%{box-shadow:0 8px 26px rgba(242,200,75,.4);}
+  50%{box-shadow:0 8px 34px rgba(242,200,75,.75);}
+}
+/* 光のスイープ */
+.dd-toggle::before{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);
+  transform:skewX(-20deg);animation:ddshine 2.8s ease-in-out infinite;}
+@keyframes ddshine{0%{left:-60%;}45%,100%{left:130%;}}
+.dd-wrap.open .dd-toggle{animation:none;box-shadow:0 6px 20px rgba(242,200,75,.3);}
+.dd-wrap.open .dd-toggle::before{display:none;}
+.dd-toggle .chev{position:relative;z-index:1;transition:transform .3s ease;font-size:14px;}
 .dd-wrap.open .dd-toggle .chev{transform:rotate(180deg);}
-.dd-toggle .sub{display:block;font-size:11.5px;color:var(--sub);font-weight:600;margin-top:4px;letter-spacing:.02em;}
+.dd-toggle .ttl{position:relative;z-index:1;}
+.dd-toggle .sub{display:block;font-size:12px;color:#5a3d00;font-weight:700;margin-top:5px;letter-spacing:.02em;}
 .dd-body{max-height:0;overflow:hidden;transition:max-height .5s ease;}
 .dd-wrap.open .dd-body{max-height:20000px;}
 .dd-inner{padding:8px 2px 4px;}
@@ -249,7 +263,7 @@ body{
 
     <div class="dd-wrap" id="ddWrap">
       <div class="dd-toggle" id="ddToggle" onclick="toggleDeep()">
-        <span>🔍 もっと深く知る<span class="sub">あなたのタイプを、もう一歩詳しく</span></span>
+        <span class="ttl">🔍 もっと深く知る<span class="sub">あなたのタイプを、もう一歩詳しく見てみる</span></span>
         <span class="chev">▼</span>
       </div>
       <div class="dd-body"><div class="dd-inner" id="ddInner"></div></div>
